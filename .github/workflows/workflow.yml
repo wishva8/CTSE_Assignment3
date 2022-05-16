@@ -8,7 +8,7 @@ on:
 env:
   PROJECT_ID: ${{secrets.KUBERNETES_ID_UNI}}
   GKE_CLUSTER: k8s-order-service-for-it19040172
-  GKE_ZONE: us-central1-c
+  GKE_ZONE: southamerica-west1-c
   
 jobs:
   build:
