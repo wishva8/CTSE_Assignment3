@@ -21,6 +21,8 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn clean install --file OrderService/pom.xml
+    - name: Building and Pushing OrderService
+      run: mvn packege dockerfile:push --file OrderService/pom.xm
 
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5 
