@@ -28,6 +28,6 @@ jobs:
         image: it19040172/orderservice
         tags: latest
         registry: docker.io
-        dockerfile: Dockerfile
+        dockerfile: OrderService/Dockerfile
         username: ${{ secrets.DOCKER_USERNAME_UNI }}
         password: ${{ secrets.DOCKER_PASSWORD_UNI }}
