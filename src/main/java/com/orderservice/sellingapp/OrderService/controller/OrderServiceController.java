@@ -19,8 +19,12 @@ public class OrderServiceController {
     public Order addOrder(@RequestBody Order order){
         return orderService.addOrder(order);
     }
-    @GetMapping("/")
+    @GetMapping("/all")
     public List<Order> getOrders(){
         return orderService.getOrders();
+    }
+    @GetMapping("/test")
+    public String getTest(){
+        return "Deployed and working";
     }
 }
