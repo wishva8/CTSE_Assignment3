@@ -25,7 +25,7 @@ jobs:
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
-        image: himantha98/supplier-service
+        image: it19040172/orderservice
         tags: latest
         registry: docker.io
         dockerfile: Dockerfile
