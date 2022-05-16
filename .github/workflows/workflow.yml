@@ -20,10 +20,10 @@ jobs:
         distribution: 'adopt'
         cache: maven
     - name: Build with Maven
-      run: mvn clean install
+      run: mvn clean install --file OrderService/pom.xml
 
     - name: Build & push Docker image
-      uses: mr-smithers-excellent/docker-build-push@v5 --file OrderService/pom.xml
+      uses: mr-smithers-excellent/docker-build-push@v5 
       with:
         image: it19040172/orderservice
         tags: latest
