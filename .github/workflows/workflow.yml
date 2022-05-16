@@ -48,5 +48,5 @@ jobs:
         APPLICATION_CREDENTIALS: ${{ secrets.KUBERNETES_SA_KEY_UNI }}
         CLUSTER_NAME: ${{ env.GKE_CLUSTER }}
         ZONE_NAME: ${{ env.GKE_ZONE }}
-      with:
-        args: apply -f k8/
+    - name: deployee
+    - run: kubectl apply -f k8/docker-k8s-order-service.yaml
