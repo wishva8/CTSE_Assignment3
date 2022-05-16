@@ -49,4 +49,4 @@ jobs:
         CLUSTER_NAME: ${{ env.GKE_CLUSTER }}
         ZONE_NAME: ${{ env.GKE_ZONE }}
     - name: deployee
-    - run: kubectl apply -f k8/docker-k8s-order-service.yaml
+      run: kubectl apply -f k8/docker-k8s-order-service.yaml
