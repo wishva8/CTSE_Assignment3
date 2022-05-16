@@ -23,7 +23,7 @@ jobs:
       run: mvn clean install
 
     - name: Build & push Docker image
-      uses: mr-smithers-excellent/docker-build-push@v5
+      uses: mr-smithers-excellent/docker-build-push@v5 --file OrderService/pom.xml
       with:
         image: it19040172/orderservice
         tags: latest
