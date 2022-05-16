@@ -46,6 +46,6 @@ jobs:
         CLUSTER_NAME: ${{env.GKE_CLUSTER}}
         ZONE_NAME: ${{env.GKE_ZONE}}
       with:
-        args: apply -f OrderService/docker-k8s-order-service.yaml
+        args: apply -f -e OrderService/docker-k8s-order-service.yaml
 
 
