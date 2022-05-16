@@ -27,7 +27,7 @@ metadata:
   name: docker-k8s-order-service
 spec:
   ports:
-    - targetPort: 9296
+    - targetPort: 9092
       port: 80
   selector:
     app: docker-k8s-order-service
