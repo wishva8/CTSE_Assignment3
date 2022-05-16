@@ -1,15 +1,10 @@
-name: OrderService CI/CD Pipeline
+name: Supplier Service CI/CD Pipeline
 
 on:
   push:
-    branches: [ main ]
-  workflow_dispatch:
-
-env:
-  PROJECT_ID: ${{secrets.KUBERNETES_ID_UNI}}
-  GKE_CLUSTER: k8s-order-service-for-it19040172
-  GKE_ZONE: us-central1-c
-
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   build:
@@ -17,35 +12,22 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v2
     - name: Set up JDK 8
-      uses: actions/setup-java@v3
+      uses: actions/setup-java@v1
       with:
         java-version: '8'
         distribution: 'adopt'
-        server-id: docker.io
-        server-username: MAVEN_USERNAME
-        server-password: MAVEN_PASSWORD
+        cache: maven
+    - name: Build with Maven
+      run: mvn clean install
 
-    - name: Building and Pushing OrderService
-      run: mvn packege dockerfile:push --file OrderService/pom.xml
-      env:
-          MAVEN_USERNAME: ${{secrets.DOCKER_USERNAME_UNI}}
-          MAVEN_PASSWORD: ${{secrets.DOCKER_PASSWORD_UNI}}
-  
-  Deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@master
-    - name: kubectl - Google Cloud GKE cluster
-      uses: ameydev/gke-kubectl-action@master
-      env:
-        PROJECT_ID: ${{env.PROJECT_ID}}
-        APPLICATION_CREDENTIALS: ${{secrets.KUBERNETES_SA_KEY_UNI}}
-        CLUSTER_NAME: ${{env.GKE_CLUSTER}}
-        ZONE_NAME: ${{env.GKE_ZONE}}
+    - name: Build & push Docker image
+      uses: mr-smithers-excellent/docker-build-push@v5
       with:
-        args: apply -f -e OrderService/docker-k8s-order-service.yaml
-
-
+        image: himantha98/supplier-service
+        tags: latest
+        registry: docker.io
+        dockerfile: Dockerfile
+        username: ${{ secrets.DOCKER_USERNAME_UNI }}
+        password: ${{ secrets.DOCKER_PASSWORD_UNI }}
