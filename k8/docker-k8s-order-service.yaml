@@ -15,7 +15,7 @@ spec:
         app: docker-k8s-order-service
     spec:
       containers:
-        - name: docker-k8s-order-service
-          image: it19040172/orderservice
-          ports:
-          - containerPort: 9092
+      - name: docker-k8s-order-service
+        image: it19040172/orderservice
+        ports:
+        - containerPort: 9092
