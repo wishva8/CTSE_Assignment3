@@ -1,33 +1,21 @@
-name: Supplier Service CI/CD Pipeline
-
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
-
-jobs:
-  build:
-
-    runs-on: ubuntu-latest
-
-    steps:
-    - uses: actions/checkout@v2
-    - name: Set up JDK 8
-      uses: actions/setup-java@v1
-      with:
-        java-version: '8'
-        distribution: 'adopt'
-        cache: maven
-    - name: Build with Maven
-      run: mvn clean install
-
-    - name: Build & push Docker image
-      uses: mr-smithers-excellent/docker-build-push@v5
-      with:
-        image: himantha98/supplier-service
-        tags: latest
-        registry: docker.io
-        dockerfile: Dockerfile
-        username: ${{ secrets.DOCKER_USERNAME_UNI }}
-        password: ${{ secrets.DOCKER_PASSWORD_UNI }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-k8s-order-service-deployement
+  labels:
+    app: docker-k8s-order-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docker-k8s-order-service
+  template:
+    metadata:
+      labels:
+        app: docker-k8s-order-service
+    spec:
+      containers:
+      - name: docker-k8s-order-service
+        image: it19040172/orderservice
+        ports:
+        - containerPort: 9092
