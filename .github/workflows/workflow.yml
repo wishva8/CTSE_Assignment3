@@ -20,9 +20,7 @@ jobs:
         distribution: 'adopt'
         cache: maven
     - name: Build with Maven
-      run: mvn clean install --file OrderService/pom.xml
-    - name: Building and Pushing OrderService
-      run: mvn packege dockerfile:push --file OrderService/pom.xml
+      run: mvn clean install
 
     - name: Build & push Docker image
       uses: mr-smithers-excellent/docker-build-push@v5 
@@ -30,6 +28,6 @@ jobs:
         image: it19040172/orderservice
         tags: latest
         registry: docker.io
-        dockerfile: OrderService/Dockerfile
+        dockerfile: Dockerfile
         username: ${{ secrets.DOCKER_USERNAME_UNI }}
         password: ${{ secrets.DOCKER_PASSWORD_UNI }}
