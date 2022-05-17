@@ -25,6 +25,6 @@ public class OrderServiceController {
     }
     @GetMapping("/test")
     public String getTest(){
-        return "Deployed and working";
+        return " new Deployed and working..";
     }
 }
