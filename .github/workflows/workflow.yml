@@ -54,4 +54,4 @@ jobs:
     - run: gcloud container clusters get-credentials ${{ env.GKE_CLUSTER }} --zone ${{ env.GKE_ZONE }}
 
     - name: deploy to kubenets
-      run: kubectl apply -f CTSE_Assignment3/k8s/docker-k8s-order-service.yaml
+      run: kubectl apply -f k8/docker-k8s-order-service.yaml
