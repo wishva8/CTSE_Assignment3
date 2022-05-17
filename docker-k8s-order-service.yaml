@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: docker-k8s-order-service-deployement
+  labels:
+    app: docker-k8s-order-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: docker-k8s-order-service
+  template:
+    metadata:
+      labels:
+        app: docker-k8s-order-service
+    spec:
+      containers:
+      - name: docker-k8s-order-service
+        image: it19040172/orderservice:1.2
+        ports:
+        - containerPort: 9092
